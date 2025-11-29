@@ -4,6 +4,7 @@ import Loading from './Loading';
 import BooksTable from '../components/BooksTable';
 import { useSearchParams } from 'react-router-dom';
 import Modal from '../components/Modal';
+import { getApiUrl } from '../config';
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -28,8 +29,8 @@ const Books = () => {
   // Fetch data
   useEffect(() => {
     Promise.all([
-      fetch('/data/books.json').then((response) => response.json()),
-      fetch('/data/authors.json').then((response) => response.json()),
+      fetch(getApiUrl('books')).then((response) => response.json()),
+      fetch(getApiUrl('authors')).then((response) => response.json()),
     ])
       .then(([booksData, authorsData]) => {
         setBooks(Array.isArray(booksData) ? booksData : [booksData]);

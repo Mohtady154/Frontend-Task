@@ -3,9 +3,9 @@ import Header from '../components/Header';
 import Loading from './Loading';
 import Table from '../components/Table/Table';
 import { useSearchParams } from 'react-router-dom';
-
 import Modal from '../components/Modal';
 import TableActions from '../components/ActionButton/TableActions';
+import { getApiUrl } from '../config';
 
 const Authors = () => {
   const [authors, setAuthors] = useState([]);
@@ -24,7 +24,7 @@ const Authors = () => {
 
   // Fetch JSON data
   useEffect(() => {
-    fetch('/data/authors.json')
+    fetch(getApiUrl('authors'))
       .then((response) => response.json())
       .then((data) => {
         console.log('Fetched authors:', data);
@@ -76,7 +76,7 @@ const Authors = () => {
         header: 'Actions',
         id: 'actions',
         cell: ({ row }) => (
-          <TableActions 
+          <TableActions
             row={row}
             onEdit={
               editingRowId === row.original.id
@@ -149,7 +149,7 @@ const Authors = () => {
     };
 
     setAuthors((prevAuthors) => [...prevAuthors, newAuthor]);
-    
+
 
     setNewName('');
     closeModal();
@@ -162,7 +162,7 @@ const Authors = () => {
         <Table
           data={filteredAuthors}
           columns={columns}
-         
+
         />
       ) : (
         <Loading />

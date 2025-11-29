@@ -18,7 +18,7 @@ const Home = () => {
   } = useLibraryData();
 
   const storesWithMetrics = React.useMemo(() => {
-    return stores.slice(0, 5).map((store) => { 
+    return stores.slice(0, 5).map((store) => {
       const storeInventory = inventory.filter(
         (item) => item.store_id === store.id
       );
@@ -27,6 +27,7 @@ const Home = () => {
       const averagePrice = noOfBooks > 0 ? totalPrice / noOfBooks : 0;
 
       return {
+        id: store.id,
         name: store.name,
         noOfBooks,
         averagePrice,
@@ -37,7 +38,7 @@ const Home = () => {
   const limitedBooksWithStores = booksWithStores.slice(0, 5);
 
   const authorsWithBookCount = React.useMemo(() => {
-    return authors.slice(0, 5).map((author) => { 
+    return authors.slice(0, 5).map((author) => {
       const noOfBooks = books.filter((book) => book.author_id === author.id).length;
       return {
         name: `${author.first_name} ${author.last_name}`,
@@ -56,8 +57,8 @@ const Home = () => {
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-gray-800">Stores</h2>
-          <Link 
-            to="/browsestores" 
+          <Link
+            to="/browsestores"
             className="bg-main text-white px-4 py-2 rounded-md hover:bg-main/90 transition-colors"
           >
             View All
@@ -81,8 +82,8 @@ const Home = () => {
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-gray-800">Books</h2>
-          <Link 
-            to="/browsebooks" 
+          <Link
+            to="/browsebooks"
             className="bg-main text-white px-4 py-2 rounded-md hover:bg-main/90 transition-colors"
           >
             View All
@@ -105,8 +106,8 @@ const Home = () => {
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-gray-800">Authors</h2>
-          <Link 
-            to="/browseauthors" 
+          <Link
+            to="/browseauthors"
             className="bg-main text-white px-4 py-2 rounded-md hover:bg-main/90 transition-colors"
           >
             View All

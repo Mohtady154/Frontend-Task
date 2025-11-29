@@ -6,14 +6,15 @@ import { useSearchParams } from 'react-router-dom';
 import Modal from '../components/Modal';
 import TableActions from '../components/ActionButton/TableActions';
 import { useNavigate } from 'react-router-dom';
+import { getApiUrl } from '../config';
 
 const Stores = () => {
   const navigate = useNavigate();
-  
+
 
   const handleViewStoreInventory = (storeId) => {
     navigate(`/store/${storeId}`);
-  };  
+  };
 
   // State declarations
   const [stores, setStores] = useState([]);
@@ -35,7 +36,7 @@ const Stores = () => {
 
   // Fetch stores data
   useEffect(() => {
-    fetch('/data/stores.json')
+    fetch(getApiUrl('stores'))
       .then((response) => response.json())
       .then((data) => {
         console.log('Fetched stores:', data);
@@ -217,7 +218,7 @@ const Stores = () => {
   };
   const onRowClick = (e, rw) => {
     handleViewStoreInventory(rw.id);
-}
+  }
   return (
     <div className="py-6">
       <Header addNew={openModal} title="Stores List" />
